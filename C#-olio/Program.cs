@@ -22,10 +22,14 @@ class Potion
     public string Name { get; set; }
     public int Healing { get; set; }
 
+    public int potion { get; set; } 
+
     public Potion(string name, int healing)
     {
         Name = name;
         Healing = healing;
+        potion = potion;
+        
     }
 }
 
@@ -36,11 +40,14 @@ class Enemy
     public int Health { get; set; }
     public int Attack { get; set; }
 
-    public Enemy(string name, int health, int attack)
+    public int Defense { get; set; }
+
+    public Enemy(string name, int health, int attack, int defense)
     {
         Name = name;
         Health = health;
         Attack = attack;
+        Defense = defense;
     }
 }
 
@@ -48,7 +55,7 @@ class Enemy
 class Knight
 {
     public string Name { get; set; }
-    public int Health { get; private set; }
+    public int Health { get; set; }
     public int Attack { get; set; }
     public int Defense { get; set; }
     public int Gold { get; set; }
@@ -221,9 +228,9 @@ class Program
         Shop shop = new Shop();
 
         // Alustetaan viholliset
-        Enemy dragon = new Enemy("Dragon", 100, 10);
-        Enemy goblin = new Enemy("Goblin", 30, 5);
-        Enemy skeleton = new Enemy("Skeleton", 50, 8);
+        Enemy dragon = new Enemy("Dragon", 100, 10, 40);
+        Enemy goblin = new Enemy("Goblin", 30, 5, 40);
+        Enemy skeleton = new Enemy("Skeleton", 50, 8, 40);
 
         // Pelin päälooppi
         while (true)
@@ -307,7 +314,8 @@ class Program
                     Console.WriteLine($"Hyökkäsit {playerDamage} vahinkoa!");
                     break;
                 case 2:
-                    player.UsePotion();
+                    Potion potion = new Potion("Healing", 10);
+                    player.UsePotion(potion);
                     break;
                 default:
                     Console.WriteLine("Virheellinen valinta.");
